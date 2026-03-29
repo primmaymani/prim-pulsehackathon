@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { HeartHandshake, Home, ShieldCheck, UserRound, Users } from "lucide-react";
+import { HeartHandshake, Home, LogOut, ShieldCheck, UserRound, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const navItems = [
   { href: "/home", label: "Home", icon: Home },
@@ -29,7 +30,15 @@ export function AppShell({
             <p className="text-sm text-muted-foreground">Home cardiac rehab companion</p>
           </div>
         </Link>
-        <div className="rounded-full bg-primary px-4 py-3 text-sm font-medium text-primary-foreground shadow-soft">Nurse Clara</div>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" asChild className="h-11 rounded-full px-4 text-sm">
+            <Link href="/profile-manager">
+              <LogOut className="mr-2 h-4 w-4" />
+              Log out
+            </Link>
+          </Button>
+          <div className="rounded-full bg-primary px-4 py-3 text-sm font-medium text-primary-foreground shadow-soft">Nurse Clara</div>
+        </div>
       </header>
       <main className="flex-1">{children}</main>
       <nav className="fixed inset-x-0 bottom-4 z-40 mx-auto flex w-[calc(100%-1.5rem)] max-w-[430px] items-end justify-between rounded-[36px] border border-border bg-background/95 px-3 py-4 shadow-soft backdrop-blur-md">

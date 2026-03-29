@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { Activity, CheckCircle2, Footprints, HeartPulse, LogIn, Timer, UserRound, Users, Waves } from "lucide-react";
+import { Activity, Camera, CheckCircle2, Footprints, HeartPulse, LogIn, Timer, UserRound, Users, Waves } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { AlertBanner } from "@/components/AlertBanner";
 import { VoiceButton } from "@/components/VoiceButton";
@@ -133,6 +133,12 @@ export default function LandingPage() {
               <p className="text-xl leading-8 text-slate-700">
                 This is a simple demo login. Maria enters the patient companion experience, and volunteers can go straight to the encouragement workspace.
               </p>
+              <Button size="lg" variant="outline" className="h-14 w-full text-lg" asChild>
+                <Link href="/profile-manager">
+                  <Camera className="mr-2 h-5 w-5" />
+                  Create a new patient profile
+                </Link>
+              </Button>
             </CardContent>
           </Card>
 
