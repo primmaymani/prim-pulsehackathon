@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { Activity, CheckCircle2, Footprints, HeartPulse, Timer, Waves } from "lucide-react";
+import { Activity, CheckCircle2, Footprints, HeartPulse, LogIn, Timer, UserRound, Users, Waves } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { AlertBanner } from "@/components/AlertBanner";
 import { VoiceButton } from "@/components/VoiceButton";
@@ -13,6 +14,7 @@ import { patientContext } from "@/data/mock-data";
 const SAFETY_RESPONSE = "Please stop immediately. I’m concerned about your symptoms. Contact your care team or emergency services right now.";
 
 export default function LandingPage() {
+  const [selectedRole, setSelectedRole] = useState<"patient" | null>(null);
   const [currentScreen, setCurrentScreen] = useState<CareScreen>("home");
   const [dailyCheckin, setDailyCheckin] = useState({
     feeling: "",
@@ -122,6 +124,61 @@ export default function LandingPage() {
 
   return (
     <AppShell>
+      {selectedRole !== "patient" ? (
+        <div className="space-y-5">
+          <Card className="border-none bg-hero-glow">
+            <CardContent className="space-y-5 p-6">
+              <p className="text-sm uppercase tracking-[0.22em] text-primary/80">Welcome back</p>
+              <h1 className="font-serif text-4xl leading-tight text-slate-900">Choose how you want to enter PulseCircle</h1>
+              <p className="text-xl leading-8 text-slate-700">
+                This is a simple demo login. Maria enters the patient companion experience, and volunteers can go straight to the encouragement workspace.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-[#FFF8E7]">
+            <CardContent className="space-y-4 p-6">
+              <div className="rounded-[24px] bg-white p-5">
+                <div className="flex items-center gap-3">
+                  <div className="rounded-full bg-secondary p-3 text-primary">
+                    <UserRound className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="font-serif text-3xl text-slate-900">Maria, patient log in</p>
+                    <p className="text-lg leading-8 text-muted-foreground">
+                      Enter the patient experience with Home check-in, Activity Focus, Post-Activity reflection, and Nurse Clara voice support.
+                    </p>
+                  </div>
+                </div>
+                <Button size="lg" className="mt-5 h-14 w-full text-lg" onClick={() => setSelectedRole("patient")}>
+                  <LogIn className="mr-2 h-5 w-5" />
+                  Enter as Maria
+                </Button>
+              </div>
+
+              <div className="rounded-[24px] bg-white p-5">
+                <div className="flex items-center gap-3">
+                  <div className="rounded-full bg-secondary p-3 text-primary">
+                    <Users className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="font-serif text-3xl text-slate-900">Volunteer log in</p>
+                    <p className="text-lg leading-8 text-muted-foreground">
+                      Open the volunteer encouragement flow and moderation-ready message experience.
+                    </p>
+                  </div>
+                </div>
+                <Button size="lg" variant="outline" className="mt-5 h-14 w-full text-lg" asChild>
+                  <Link href="/volunteer">
+                    <LogIn className="mr-2 h-5 w-5" />
+                    Enter as Volunteer
+                  </Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      ) : (
       <div className="space-y-5">
         <Card className="border-none bg-hero-glow">
           <CardContent className="space-y-4 p-6">
@@ -132,6 +189,9 @@ export default function LandingPage() {
               <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
               {patientContext.wearableName} linked
             </div>
+            <Button variant="outline" className="h-12 w-full text-base" onClick={() => setSelectedRole(null)}>
+              Change login
+            </Button>
             <div className="grid grid-cols-3 gap-2">
               {tabs.map((tab) => (
                 <Button
@@ -366,8 +426,9 @@ export default function LandingPage() {
           <div className="rounded-[22px] bg-[#FFF4F1] p-4 text-base leading-7 text-rose-800">{errorMessage}</div>
         ) : null}
       </div>
+      )}
 
-      {currentScreen === "activity" ? (
+      {selectedRole === "patient" && currentScreen === "activity" ? (
         <VoiceButton
           floating
           isListening={isListening}
