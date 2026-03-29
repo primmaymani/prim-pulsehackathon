@@ -39,16 +39,16 @@ export default function ProfileManagerPage() {
         <Card className="border-none bg-hero-glow">
           <CardContent className="space-y-4 p-6">
             <p className="text-sm uppercase tracking-[0.22em] text-primary/80">Profile manager</p>
-            <h1 className="font-serif text-[2rem] leading-tight text-slate-900 sm:text-4xl">Create a new patient profile before entering the app</h1>
+            <h1 className="font-serif text-[2rem] leading-tight text-slate-900 sm:text-4xl">Create a new patient profile</h1>
             <p className="text-lg leading-8 text-slate-700 sm:text-xl">
-              This intake page lives outside the main experience. Take a photo of the medical record and the doctor’s note, and PulseCircle prepares Maria’s profile before logging into the home page.
+              Take a photo of the <strong>medical record</strong> and <strong>doctor’s note</strong>. Then open the app.
             </p>
           </CardContent>
         </Card>
 
         <Card className="bg-[#FFF8E7]">
           <CardHeader>
-            <CardTitle className="text-[2rem]">Capture patient paperwork</CardTitle>
+            <CardTitle className="text-[2rem]">Take photos</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <input
@@ -76,7 +76,7 @@ export default function ProfileManagerPage() {
                 <div className="flex-1">
                   <p className="font-serif text-[2rem] leading-tight text-slate-900 sm:text-3xl">Medical record</p>
                   <p className="mt-2 text-base leading-8 text-muted-foreground sm:text-lg">
-                    Tap the camera button to prompt the device camera and capture the patient’s medical record.
+                    Tap <strong>Open camera</strong> to take a photo.
                   </p>
                   <Button size="lg" className="mt-4 h-auto min-h-14 w-full whitespace-normal px-5 py-4 text-base leading-6 sm:text-lg" onClick={openMedicalRecordCamera}>
                     <Camera className="mr-2 h-5 w-5 shrink-0" />
@@ -100,7 +100,7 @@ export default function ProfileManagerPage() {
                 <div className="flex-1">
                   <p className="font-serif text-[2rem] leading-tight text-slate-900 sm:text-3xl">Doctor’s note</p>
                   <p className="mt-2 text-base leading-8 text-muted-foreground sm:text-lg">
-                    Tap the camera button to prompt the device camera and capture the doctor’s note that defines Maria’s prescribed rehab progression.
+                    Tap <strong>Open camera</strong> to take a photo.
                   </p>
                   <Button size="lg" variant="outline" className="mt-4 h-auto min-h-14 w-full whitespace-normal px-5 py-4 text-base leading-6 sm:text-lg" onClick={openDoctorNoteCamera}>
                     <Camera className="mr-2 h-5 w-5 shrink-0" />
@@ -120,30 +120,30 @@ export default function ProfileManagerPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-[2rem]">Auto-created profile preview</CardTitle>
+            <CardTitle className="text-[2rem]">Profile preview</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="rounded-[24px] bg-secondary/50 p-5">
-              <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">Mocked extracted details</p>
+              <p className="text-sm uppercase tracking-[0.18em] text-muted-foreground">Details found</p>
               <div className="mt-3 space-y-2 text-base text-slate-700 sm:text-lg">
                 <p>Patient: Maria Alvarez</p>
                 <p>Program: Home cardiac rehabilitation</p>
                 <p>Prescribed activity: 20-minute walk</p>
-                <p>Progression note: Gentle pacing with symptom monitoring and post-activity reflection</p>
+                <p>Plan: Gentle pacing and symptom check-in</p>
               </div>
             </div>
 
             <div className="rounded-[24px] bg-[#EEF7F4] p-5 text-base leading-8 text-slate-700 sm:text-lg">
-              Once both images are captured, PulseCircle can prepare the patient profile and log into the existing home experience.
+              After both photos are added, tap <strong>Create profile</strong>.
             </div>
 
             <div className="grid gap-3">
               <Button size="lg" className="h-auto min-h-14 whitespace-normal px-5 py-4 text-base leading-6 sm:text-lg" disabled={!readyToCreate || creatingProfile} onClick={handleCreateProfile}>
                 <HeartHandshake className="mr-2 h-5 w-5 shrink-0" />
-                <span className="text-left">{creatingProfile ? "Creating profile..." : "Create profile and enter home"}</span>
+                <span className="text-left">{creatingProfile ? "Creating profile..." : "Create profile and open app"}</span>
               </Button>
               <Button size="lg" variant="outline" className="h-auto min-h-14 whitespace-normal px-5 py-4 text-base leading-6 sm:text-lg" asChild>
-                <Link href="/">Back to login entry</Link>
+                <Link href="/">Back</Link>
               </Button>
             </div>
           </CardContent>

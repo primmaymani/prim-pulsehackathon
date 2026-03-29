@@ -16,7 +16,7 @@ export default function HomePage() {
           <CardContent className="space-y-3 p-6">
             <p className="text-sm uppercase tracking-[0.22em] text-primary/80">Home</p>
             <h1 className="font-serif text-4xl leading-tight text-slate-900">Welcome {patientContext.patientName}!</h1>
-            <p className="text-lg leading-8 text-slate-700">{patientProfile.confidenceNote}</p>
+            <p className="text-lg leading-8 text-slate-700"><strong>Today’s goal:</strong> keep a steady routine.</p>
           </CardContent>
         </Card>
 
@@ -60,7 +60,8 @@ export default function HomePage() {
             <div className="flex items-center gap-3 text-primary">
               <CalendarHeart className="h-6 w-6" />
               <p className="text-xl font-medium">
-                You are {patientContext.sessionsCompleted}/{patientContext.totalSessions} visits to finishing the program. Keep going!
+                <strong>{patientContext.sessionsCompleted}/{patientContext.totalSessions}</strong>{" "}
+                visits completed
               </p>
             </div>
             <div className="h-5 overflow-hidden rounded-full bg-secondary">
@@ -72,14 +73,19 @@ export default function HomePage() {
             <div className="rounded-[24px] bg-secondary/50 p-5">
               <div className="inline-flex items-center gap-2 text-primary">
                 <Heart className="h-5 w-5" />
-                {patientContext.streak}-day streak
+                <strong>{patientContext.streak}-day streak</strong>
               </div>
               <p className="mt-2 text-lg leading-8 text-muted-foreground">
-                Your care team goals are {patientContext.careTeamGoals.toLowerCase()}.
+                Goal: {patientContext.careTeamGoals.toLowerCase()}.
               </p>
             </div>
             <Button size="lg" asChild className="h-14 w-full text-lg">
-              <Link href="/session/session-1">Start Focus Mode</Link>
+              <Link href="/session/session-1">
+                <span>
+                  Start{" "}
+                  <strong>Focus Mode</strong>
+                </span>
+              </Link>
             </Button>
           </CardContent>
         </Card>

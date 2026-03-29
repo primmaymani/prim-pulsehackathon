@@ -11,16 +11,16 @@ export default function AssistantPage() {
         <Card className="border-none bg-hero-glow">
           <CardContent className="space-y-3 p-6">
             <p className="text-sm uppercase tracking-[0.22em] text-primary/80">Nurse Clara</p>
-            <h1 className="font-serif text-4xl leading-tight text-slate-900">Warm, gentle support anytime</h1>
+            <h1 className="font-serif text-4xl leading-tight text-slate-900">Support anytime</h1>
             <p className="text-lg leading-8 text-slate-700">
-              Nurse Clara can explain, repeat, summarize, and help notify the care team if something sounds concerning.
+              Nurse Clara can <strong>explain</strong>, <strong>repeat</strong>, and help contact the <strong>care team</strong>.
             </p>
           </CardContent>
         </Card>
         <VoiceAssistantPanel />
         <Card className="bg-[#FFF8E7]">
           <CardHeader>
-            <CardTitle className="text-3xl">Conversation and voice mode</CardTitle>
+            <CardTitle className="text-3xl">Helpful prompts</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {Object.entries(nurseClaraPrompts).map(([key, value]) => (
@@ -35,10 +35,10 @@ export default function AssistantPage() {
           <CardContent className="space-y-3 p-6">
             <div className="inline-flex items-center gap-2 text-primary">
               <ShieldPlus className="h-5 w-5" />
-              Safety guardrails
+              Safety
             </div>
             <p className="text-base leading-7 text-slate-700">
-              Nurse Clara never changes the patient’s care plan, never gives diagnosis, and never presents independent medical judgment. The assistant may explain, summarize, encourage, and escalate.
+              Nurse Clara does <strong>not</strong> change your care plan or give medical advice.
             </p>
           </CardContent>
         </Card>

@@ -11,7 +11,7 @@ export default function PersonalInfoPage() {
           <CardContent className="space-y-3 p-6">
             <p className="text-sm uppercase tracking-[0.22em] text-primary/80">Personal info</p>
             <h1 className="font-serif text-4xl leading-tight text-slate-900">{patientContext.patientName}</h1>
-            <p className="text-lg leading-8 text-slate-700">{patientProfile.diagnosisContext}</p>
+            <p className="text-lg leading-8 text-slate-700"><strong>Care summary:</strong> home cardiac rehab support.</p>
           </CardContent>
         </Card>
 
@@ -24,7 +24,7 @@ export default function PersonalInfoPage() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Program progress</p>
-                  <p className="text-2xl font-semibold">{patientContext.sessionsCompleted} of {patientContext.totalSessions} sessions completed</p>
+                  <p className="text-2xl font-semibold"><strong>{patientContext.sessionsCompleted}</strong> of {patientContext.totalSessions} sessions completed</p>
                 </div>
               </div>
               <div className="h-4 overflow-hidden rounded-full bg-secondary">
@@ -60,7 +60,7 @@ export default function PersonalInfoPage() {
                 <div>
                   <p className="font-medium">Current safety status</p>
                   <p className="text-muted-foreground">
-                    {patientContext.redFlagTriggered ? "A care team flag is active." : "No care team alert is currently active."}
+                    {patientContext.redFlagTriggered ? "A care team flag is active." : "No care team alert."}
                   </p>
                 </div>
               </div>
@@ -70,8 +70,8 @@ export default function PersonalInfoPage() {
                   <p className="font-medium">Wearable connection</p>
                   <p className="text-muted-foreground">
                     {patientContext.wearableConnected
-                      ? `${patientContext.wearableName} linked and ready for session tracking.`
-                      : "No wearable linked right now."}
+                      ? `${patientContext.wearableName} linked.`
+                      : "No wearable linked."}
                   </p>
                 </div>
               </div>
@@ -80,14 +80,14 @@ export default function PersonalInfoPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Profile summary</CardTitle>
+              <CardTitle>Summary</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3 text-lg text-muted-foreground">
-              <p>Name: {patientProfile.name}</p>
-              <p>Age: {patientProfile.age}</p>
-              <p>Suggested exercise intensity: {patientProfile.intensity}</p>
-              <p>Suggested duration: {patientProfile.duration}</p>
-              <p>Current streak: {patientContext.streak} days</p>
+              <p><strong>Name:</strong> {patientProfile.name}</p>
+              <p><strong>Age:</strong> {patientProfile.age}</p>
+              <p><strong>Intensity:</strong> {patientProfile.intensity}</p>
+              <p><strong>Duration:</strong> {patientProfile.duration}</p>
+              <p><strong>Streak:</strong> {patientContext.streak} days</p>
             </CardContent>
           </Card>
 
