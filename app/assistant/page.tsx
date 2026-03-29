@@ -1,8 +1,8 @@
-import { Mic, Repeat2, ShieldPlus, Volume2 } from "lucide-react";
+import { ShieldPlus } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { nurseClaraPrompts } from "@/data/mock-data";
+import { VoiceAssistantPanel } from "@/components/voice-assistant-panel";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 
 export default function AssistantPage() {
   return (
@@ -17,6 +17,7 @@ export default function AssistantPage() {
             </p>
           </CardContent>
         </Card>
+        <VoiceAssistantPanel />
         <Card className="bg-[#FFF8E7]">
           <CardHeader>
             <CardTitle className="text-3xl">Conversation and voice mode</CardTitle>
@@ -30,38 +31,17 @@ export default function AssistantPage() {
             ))}
           </CardContent>
         </Card>
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-3xl">Assistant controls</CardTitle>
-            </CardHeader>
-            <CardContent className="grid gap-3">
-              <Button size="lg" className="h-14 justify-start gap-2 text-lg">
-                <Mic className="h-5 w-5" />
-                Start voice mode
-              </Button>
-              <Button size="lg" variant="outline" className="h-14 justify-start gap-2 text-lg">
-                <Repeat2 className="h-5 w-5" />
-                Repeat last instruction
-              </Button>
-              <Button size="lg" variant="secondary" className="h-14 justify-start gap-2 text-lg">
-                <Volume2 className="h-5 w-5" />
-                Read today’s plan aloud
-              </Button>
-            </CardContent>
-          </Card>
-          <Card className="bg-[#EEF5F8]">
-            <CardContent className="space-y-3 p-6">
-              <div className="inline-flex items-center gap-2 text-primary">
-                <ShieldPlus className="h-5 w-5" />
-                Safety guardrails
-              </div>
-              <p className="text-base leading-7 text-slate-700">
-                Nurse Clara never changes the patient’s care plan, never gives diagnosis, and never presents independent medical judgment. The assistant may explain, summarize, encourage, and escalate.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+        <Card className="bg-[#EEF5F8]">
+          <CardContent className="space-y-3 p-6">
+            <div className="inline-flex items-center gap-2 text-primary">
+              <ShieldPlus className="h-5 w-5" />
+              Safety guardrails
+            </div>
+            <p className="text-base leading-7 text-slate-700">
+              Nurse Clara never changes the patient’s care plan, never gives diagnosis, and never presents independent medical judgment. The assistant may explain, summarize, encourage, and escalate.
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </AppShell>
   );
