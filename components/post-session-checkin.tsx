@@ -8,18 +8,18 @@ export function PostSessionCheckin({ escalated = false }: { escalated?: boolean 
     <Card className={escalated ? "border-rose-200 bg-rose-50/70" : ""}>
       <CardHeader>
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <CardTitle>Five short check-in questions</CardTitle>
+          <CardTitle className="text-3xl">Five short check-in questions</CardTitle>
           {escalated ? <Badge variant="danger">Care team notified</Badge> : <Badge variant="success">Quick and supportive</Badge>}
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
         {checkinQuestions.map((item, index) => (
-          <div key={item.id} className="rounded-[24px] bg-background p-4">
+          <div key={item.id} className="rounded-[24px] bg-background p-5">
             <p className="text-sm text-muted-foreground">Question {index + 1}</p>
-            <p className="mt-1 text-lg">{item.question}</p>
+            <p className="mt-1 text-xl leading-8">{item.question}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {item.options.map((option) => (
-                <Button key={option} variant="outline" className="rounded-full">
+                <Button key={option} variant="outline" className="min-h-12 rounded-full px-5 text-base">
                   {option}
                 </Button>
               ))}
@@ -27,7 +27,7 @@ export function PostSessionCheckin({ escalated = false }: { escalated?: boolean 
           </div>
         ))}
         {escalated ? (
-          <div className="rounded-[24px] border border-rose-200 bg-white p-5 text-sm leading-7 text-slate-700">
+          <div className="rounded-[24px] border border-rose-200 bg-white p-5 text-base leading-8 text-slate-700">
             Thank you for sharing how you feel. Because you reported symptoms that may need follow-up, your care team summary has been marked for review. Please wait for their guidance. Nurse Clara cannot give medical advice.
           </div>
         ) : null}

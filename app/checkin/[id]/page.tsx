@@ -1,19 +1,26 @@
 import Link from "next/link";
-import { ArrowRight, AlertTriangle } from "lucide-react";
+import { ArrowRight, AlertTriangle, Heart } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { PostSessionCheckin } from "@/components/post-session-checkin";
-import { PageHero } from "@/components/page-hero";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 export default function CheckinPage() {
   return (
     <AppShell>
-      <PageHero
-        title="A short check-in before we celebrate"
-        description="These questions help keep your care team informed. If something sounds concerning, PulseCircle can mark it for follow-up without offering medical advice."
-      />
-      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="space-y-5">
+        <Card className="border-none bg-hero-glow">
+          <CardContent className="space-y-3 p-6">
+            <div className="inline-flex items-center gap-2 text-primary">
+              <Heart className="h-5 w-5" />
+              Session complete
+            </div>
+            <h1 className="font-serif text-4xl leading-tight text-slate-900">Just five quick check-in questions</h1>
+            <p className="text-lg leading-8 text-slate-700">
+              These help your care team stay informed. PulseCircle can mark concerns for review, but it does not give medical advice.
+            </p>
+          </CardContent>
+        </Card>
         <PostSessionCheckin />
         <Card className="bg-[#FFF8E7]">
           <CardContent className="space-y-5 p-6">

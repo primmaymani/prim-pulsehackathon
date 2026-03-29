@@ -43,3 +43,18 @@ body {
 a {
   @apply transition-colors;
 }
+
+@keyframes slow-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.92;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+.animate-slow-pulse {
+  animation: slow-pulse 2.8s ease-in-out infinite;
+}

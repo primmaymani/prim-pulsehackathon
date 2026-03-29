@@ -1,14 +1,13 @@
 import Link from "next/link";
-import { HeartHandshake, Home, LayoutGrid, ShieldCheck, Users } from "lucide-react";
-import { NurseClaraBubble } from "@/components/nurse-clara-bubble";
+import { HeartHandshake, Home, ShieldCheck, UserRound, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/home", label: "Home", icon: Home },
   { href: "/community", label: "Community", icon: Users },
   { href: "/assistant", label: "Nurse Clara", icon: HeartHandshake, center: true },
-  { href: "/supporters", label: "Support", icon: LayoutGrid },
-  { href: "/care-team", label: "Care team", icon: ShieldCheck }
+  { href: "/personal-info", label: "Personal", icon: UserRound },
+  { href: "/care-team", label: "Care Team", icon: ShieldCheck }
 ];
 
 export function AppShell({
@@ -19,23 +18,21 @@ export function AppShell({
   activeHref?: string;
 }) {
   return (
-    <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 pb-28 pt-6 sm:px-6 lg:px-8">
-      <header className="mb-8 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
+    <div className="mx-auto flex min-h-screen w-full max-w-[430px] flex-col px-4 pb-40 pt-4">
+      <header className="mb-6 flex items-center justify-between">
+        <Link href="/home" className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground">
             <HeartHandshake className="h-6 w-6" />
           </div>
           <div>
-            <p className="font-serif text-2xl text-foreground">PulseCircle</p>
-            <p className="text-sm text-muted-foreground">Warm support for home cardiac rehab</p>
+            <p className="font-serif text-[1.75rem] leading-none text-foreground">PulseCircle</p>
+            <p className="text-sm text-muted-foreground">Home cardiac rehab companion</p>
           </div>
         </Link>
-        <div className="hidden rounded-full border border-border bg-background/80 px-4 py-2 text-sm text-muted-foreground shadow-soft md:block">
-          Demo mode with mocked records, metrics, and moderation
-        </div>
+        <div className="rounded-full bg-primary px-4 py-3 text-sm font-medium text-primary-foreground shadow-soft">Nurse Clara</div>
       </header>
       <main className="flex-1">{children}</main>
-      <nav className="fixed inset-x-0 bottom-4 z-40 mx-auto flex max-w-3xl items-center justify-around rounded-full border border-border bg-background/95 px-3 py-3 shadow-soft backdrop-blur-md">
+      <nav className="fixed inset-x-0 bottom-4 z-40 mx-auto flex w-[calc(100%-1.5rem)] max-w-[430px] items-end justify-between rounded-[36px] border border-border bg-background/95 px-3 py-4 shadow-soft backdrop-blur-md">
         {navItems.map((item) => {
           const Icon = item.icon;
           const active = activeHref === item.href;
@@ -44,19 +41,18 @@ export function AppShell({
               key={item.href}
               href={item.href}
               className={cn(
-                "flex min-w-0 flex-col items-center gap-1 rounded-full px-3 py-2 text-xs text-muted-foreground transition hover:text-foreground",
+                "flex min-w-0 flex-1 flex-col items-center gap-1 rounded-full px-2 py-3 text-[0.95rem] text-muted-foreground transition hover:text-foreground",
                 active && "text-foreground",
                 item.center &&
-                  "relative -mt-10 rounded-full bg-primary px-6 py-5 text-primary-foreground shadow-soft hover:text-primary-foreground"
+                  "relative -mt-12 mx-1 flex-none rounded-full bg-primary px-5 py-6 text-primary-foreground shadow-soft hover:text-primary-foreground"
               )}
             >
-              <Icon className={cn("h-5 w-5", item.center && "h-7 w-7")} />
-              <span className={cn("max-w-[64px] truncate", item.center && "sr-only md:not-sr-only md:block")}>{item.label}</span>
+              <Icon className={cn("h-7 w-7", item.center && "h-8 w-8")} />
+              <span className={cn("max-w-[72px] text-center leading-5", item.center && "max-w-[80px]")}>{item.label}</span>
             </Link>
           );
         })}
       </nav>
-      <NurseClaraBubble />
     </div>
   );
 }

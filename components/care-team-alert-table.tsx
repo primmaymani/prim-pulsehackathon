@@ -6,43 +6,30 @@ export function CareTeamAlertTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Session summaries and alerts</CardTitle>
+        <CardTitle className="text-3xl">Session summaries and alerts</CardTitle>
       </CardHeader>
-      <CardContent className="overflow-x-auto">
-        <table className="min-w-full text-left text-sm">
-          <thead className="text-muted-foreground">
-            <tr>
-              <th className="pb-3 pr-4 font-medium">Patient</th>
-              <th className="pb-3 pr-4 font-medium">Date</th>
-              <th className="pb-3 pr-4 font-medium">Summary</th>
-              <th className="pb-3 pr-4 font-medium">Symptoms</th>
-              <th className="pb-3 font-medium">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sessionSummaries.map((session) => (
-              <tr key={session.id} className="border-t border-border align-top">
-                <td className="py-4 pr-4">{session.patientName}</td>
-                <td className="py-4 pr-4">{session.date}</td>
-                <td className="py-4 pr-4 text-muted-foreground">{session.summary}</td>
-                <td className="py-4 pr-4">
-                  <div className="flex flex-wrap gap-2">
-                    {session.symptoms.map((symptom) => (
-                      <Badge key={symptom} variant={session.status === "flagged" ? "danger" : "secondary"}>
-                        {symptom}
-                      </Badge>
-                    ))}
-                  </div>
-                </td>
-                <td className="py-4">
-                  <Badge variant={session.status === "flagged" ? "danger" : "success"}>
-                    {session.status === "flagged" ? "Review now" : "Stable"}
-                  </Badge>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <CardContent className="grid gap-4">
+        {sessionSummaries.map((session) => (
+          <div key={session.id} className="rounded-[24px] bg-secondary/35 p-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-sm text-muted-foreground">{session.date}</p>
+                <p className="text-xl font-medium">{session.patientName}</p>
+              </div>
+              <Badge variant={session.status === "flagged" ? "danger" : "success"}>
+                {session.status === "flagged" ? "Review now" : "Stable"}
+              </Badge>
+            </div>
+            <p className="mt-4 text-lg leading-8 text-muted-foreground">{session.summary}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {session.symptoms.map((symptom) => (
+                <Badge key={symptom} variant={session.status === "flagged" ? "danger" : "secondary"}>
+                  {symptom}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        ))}
       </CardContent>
     </Card>
   );

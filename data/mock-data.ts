@@ -10,16 +10,16 @@ import type {
 
 export const patientProfile: PatientProfile = {
   id: "pt-1001",
-  name: "Evelyn Harper",
-  preferredName: "Evelyn",
-  age: 68,
+  name: "Maria Alvarez",
+  preferredName: "Maria",
+  age: 71,
   diagnosisContext: "Coming home after a heart failure hospitalization and beginning cardiac rehab.",
   intensity: "Light to moderate walking with guided rest breaks",
-  duration: "20 to 25 minutes",
+  duration: "15 to 30 minutes",
   rehabPlan: "Three sessions each week, with two completed at home and one completed with the rehab program.",
-  streakDays: 6,
+  streakDays: 5,
   accomplishments: [
-    "Completed 2 home sessions this week",
+    "Completed 8 sessions so far",
     "Shared progress with 4 supporters",
     "Finished every check-in this month"
   ],
@@ -32,11 +32,11 @@ export const doctorNote: DoctorNote = {
   summary:
     "Referral reviewed. Home-based rehab may be used for two of three weekly sessions with guided pacing and symptom check-ins.",
   parsedFields: [
-    { label: "Patient name", value: "Evelyn Harper", editable: true },
-    { label: "Age", value: "68", editable: true },
+    { label: "Patient name", value: "Maria Alvarez", editable: true },
+    { label: "Age", value: "71", editable: true },
     { label: "Referral context", value: "Heart failure follow-up with cardiac rehab referral", editable: true },
     { label: "Suggested exercise intensity", value: "Light to moderate", editable: true },
-    { label: "Suggested exercise duration", value: "20 to 25 minutes", editable: true },
+    { label: "Suggested exercise duration", value: "15 to 30 minutes", editable: true },
     { label: "Hybrid rehab plan", value: "2 home sessions + 1 program session each week", editable: true }
   ]
 };
@@ -44,39 +44,39 @@ export const doctorNote: DoctorNote = {
 export const weeklySchedule: RehabSession[] = [
   {
     id: "session-1",
-    title: "Morning walking session",
+    title: "Go on a walk",
     day: "Mon",
     dateLabel: "Mar 30",
     time: "09:00",
-    durationMinutes: 20,
+    durationMinutes: 15,
     intensity: "Light to moderate",
     location: "Home",
-    focus: "Warm-up, guided walking, cool-down",
+    focus: "Gentle warm-up, easy walking, and cool-down",
     completed: true,
     status: "completed"
   },
   {
     id: "session-2",
-    title: "Gentle step and breathe",
+    title: "Breathing and stretch break",
     day: "Wed",
     dateLabel: "Apr 1",
-    time: "10:30",
-    durationMinutes: 25,
-    intensity: "Light to moderate",
+    time: "11:00",
+    durationMinutes: 10,
+    intensity: "Light",
     location: "Home",
-    focus: "Paced walking with breathing cues",
+    focus: "Seated breathing and gentle shoulder stretches",
     status: "scheduled"
   },
   {
     id: "session-3",
-    title: "Cardiac rehab visit",
+    title: "Easy indoor cycling",
     day: "Fri",
     dateLabel: "Apr 3",
     time: "14:00",
-    durationMinutes: 45,
-    intensity: "Program guided",
-    location: "Clinic",
-    focus: "In-program check and supervised exercise",
+    durationMinutes: 12,
+    intensity: "Light",
+    location: "Home",
+    focus: "Light pedaling with rest breaks",
     status: "scheduled"
   }
 ];
@@ -84,10 +84,10 @@ export const weeklySchedule: RehabSession[] = [
 export const encouragementMessages: EncouragementMessage[] = [
   {
     id: "enc-1",
-    author: "Maya Harper",
+    author: "Elena Alvarez",
     role: "Family",
     relationship: "Daughter",
-    message: "Proud of you for keeping your routine gentle and steady. We are all cheering for you.",
+    message: "You are doing beautifully, Mom. One small step at a time is still progress.",
     timeAgo: "10 minutes ago",
     approved: true
   },
@@ -96,7 +96,7 @@ export const encouragementMessages: EncouragementMessage[] = [
     author: "Jon Ruiz",
     role: "Friend",
     relationship: "Neighbor",
-    message: "Your consistency is inspiring. I can join you on a short porch walk this weekend if you would like.",
+    message: "Thinking of you today. Your steady routine is something to feel proud of.",
     timeAgo: "1 hour ago",
     approved: true
   },
@@ -171,7 +171,7 @@ export const checkinQuestions: CheckinQuestion[] = [
 export const sessionSummaries: SessionSummary[] = [
   {
     id: "sum-1",
-    patientName: "Evelyn Harper",
+    patientName: "Maria Alvarez",
     date: "2026-03-28",
     summary: "Completed a 22-minute home walking session with stable pacing and a calm cool-down.",
     symptoms: ["No chest discomfort", "Mild expected breathlessness"],
@@ -179,7 +179,7 @@ export const sessionSummaries: SessionSummary[] = [
   },
   {
     id: "sum-2",
-    patientName: "Evelyn Harper",
+    patientName: "Maria Alvarez",
     date: "2026-03-26",
     summary: "Session stopped early after the patient reported dizziness and unexpected shortness of breath during activity.",
     symptoms: ["Dizziness", "Unexpected shortness of breath"],
@@ -201,4 +201,14 @@ export const nurseClaraPrompts = {
     "We will take this gently. Follow your plan, pause if you need a moment, and I will stay with you through each step.",
   checkin:
     "Before we celebrate today, I have five short questions so your care team can stay informed."
+};
+
+export const patientContext = {
+  patientName: "Maria",
+  sessionsCompleted: 8,
+  totalSessions: 36,
+  streak: 5,
+  lastActivity: "15-min walk",
+  careTeamGoals: "30-min walks 3x/week, gentle stretching daily",
+  redFlagTriggered: false
 };
