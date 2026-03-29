@@ -1,4 +1,5 @@
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, Mail, Phone } from "lucide-react";
+import { patientContext } from "@/data/mock-data";
 
 export function AlertBanner({ message }: { message: string }) {
   return (
@@ -8,6 +9,16 @@ export function AlertBanner({ message }: { message: string }) {
         <div>
           <p className="text-sm uppercase tracking-[0.18em] text-rose-700">Safety alert</p>
           <p className="mt-2 text-lg leading-8">{message}</p>
+          <div className="mt-4 space-y-2 rounded-[20px] bg-white/80 p-4 text-base text-slate-700">
+            <div className="flex items-center gap-2">
+              <Phone className="h-4 w-4 text-rose-700" />
+              <span>Emergency contact: {patientContext.emergencyContact}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Mail className="h-4 w-4 text-rose-700" />
+              <span>Care team: {patientContext.careTeamContact}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

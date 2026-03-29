@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Activity, Footprints, HeartPulse, Timer, Waves } from "lucide-react";
+import { Activity, CheckCircle2, Footprints, HeartPulse, Timer, Waves } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { AlertBanner } from "@/components/AlertBanner";
 import { VoiceButton } from "@/components/VoiceButton";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { detectSafetyRisk, useVoiceAgent, type CareScreen } from "@/hooks/useVoiceAgent";
+import { patientContext } from "@/data/mock-data";
 
 const SAFETY_RESPONSE = "Please stop immediately. I’m concerned about your symptoms. Contact your care team or emergency services right now.";
 
@@ -24,6 +25,7 @@ export default function LandingPage() {
   const [dailyStep, setDailyStep] = useState<1 | 2 | 3>(1);
   const [isWalking, setIsWalking] = useState(false);
   const [walkSeconds, setWalkSeconds] = useState(0);
+  const [isPreparingWalk, setIsPreparingWalk] = useState(false);
   const {
     transcript,
     aiResponse,
@@ -91,6 +93,15 @@ export default function LandingPage() {
 
   function startWalk() {
     setCurrentScreen("activity");
+    setIsPreparingWalk(true);
+    setIsWalking(false);
+    setWalkSeconds(0);
+    setAlertState("normal");
+    speak("Ready to go, Maria? I’ve got your heart monitor synced. Is your water nearby?");
+  }
+
+  function confirmWalkReady() {
+    setIsPreparingWalk(false);
     setIsWalking(true);
     setWalkSeconds(0);
     setAlertState("normal");
@@ -99,6 +110,7 @@ export default function LandingPage() {
 
   function endWalk() {
     setIsWalking(false);
+    setIsPreparingWalk(false);
     setCurrentScreen("post");
   }
 
@@ -116,6 +128,10 @@ export default function LandingPage() {
             <p className="text-sm uppercase tracking-[0.22em] text-primary/80">Embedded voice companion</p>
             <h1 className="font-serif text-4xl leading-tight text-slate-900">Good morning, Maria</h1>
             <p className="text-xl leading-8 text-slate-700">Nurse Clara follows you through your daily check-in, your walk, and your reflection after you finish.</p>
+            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-800">
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+              {patientContext.wearableName} linked
+            </div>
             <div className="grid grid-cols-3 gap-2">
               {tabs.map((tab) => (
                 <Button
@@ -142,6 +158,17 @@ export default function LandingPage() {
                 <div className="rounded-[24px] bg-white p-5">
                   <p className="font-medium text-slate-900">20-minute walk</p>
                   <p className="mt-2 text-lg leading-8 text-muted-foreground">A gentle, steady walk at the pace already prescribed by Maria’s care team.</p>
+                </div>
+                <div className="rounded-[24px] bg-white p-5">
+                  <div className="flex items-center gap-2 text-primary">
+                    <CheckCircle2 className="h-5 w-5" />
+                    <p className="font-medium text-slate-900">Wearable status</p>
+                  </div>
+                  <p className="mt-2 text-lg leading-8 text-muted-foreground">
+                    {patientContext.wearableConnected
+                      ? `${patientContext.wearableName} is connected and ready for the walk.`
+                      : "No wearable is connected right now."}
+                  </p>
                 </div>
                 <Button size="lg" className="h-14 w-full text-lg" onClick={beginDailyCheckin}>
                   Start Check-in
@@ -180,6 +207,10 @@ export default function LandingPage() {
                 <p className="text-sm uppercase tracking-[0.18em] text-white/70">Activity focus</p>
                 <h2 className="font-serif text-4xl">Live walking session</h2>
                 <p className="text-lg leading-8 text-white/85">The voice companion stays available during the walk so Maria can speak naturally if she feels proud, tired, or concerned.</p>
+                <div className="inline-flex w-fit items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-900">
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  {patientContext.wearableName} linked
+                </div>
                 <div className="grid grid-cols-3 gap-3">
                   <div className="rounded-[24px] bg-white/10 p-4">
                     <Timer className="h-6 w-6 text-[#F7E9C7]" />
@@ -197,14 +228,36 @@ export default function LandingPage() {
                     <p className="font-serif text-3xl">96</p>
                   </div>
                 </div>
-                <div className="grid gap-3">
-                  <Button size="lg" className="h-14 bg-[#F7E9C7] text-slate-900 hover:bg-[#F1DDA8]" onClick={startWalk}>
-                    Start Walk
-                  </Button>
-                  <Button size="lg" variant="outline" className="h-14 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white" onClick={endWalk}>
-                    End Walk
-                  </Button>
-                </div>
+                {isPreparingWalk ? (
+                  <div className="rounded-[28px] bg-white/10 p-5">
+                    <p className="font-serif text-3xl text-white">Ready to go, Maria?</p>
+                    <p className="mt-3 text-lg leading-8 text-white/85">
+                      I’ve got your heart monitor synced. Is your water nearby?
+                    </p>
+                    <div className="mt-4 grid gap-3">
+                      <Button size="lg" className="h-14 bg-[#F7E9C7] text-slate-900 hover:bg-[#F1DDA8]" onClick={confirmWalkReady}>
+                        Yes, Clara
+                      </Button>
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="h-14 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white"
+                        onClick={() => setIsPreparingWalk(false)}
+                      >
+                        Not yet
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid gap-3">
+                    <Button size="lg" className="h-14 bg-[#F7E9C7] text-slate-900 hover:bg-[#F1DDA8]" onClick={startWalk}>
+                      Start Walk
+                    </Button>
+                    <Button size="lg" variant="outline" className="h-14 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white" onClick={endWalk}>
+                      End Walk
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
 

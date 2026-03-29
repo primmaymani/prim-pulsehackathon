@@ -1,4 +1,4 @@
-import { CalendarHeart, ClipboardList, HeartPulse, ShieldCheck } from "lucide-react";
+import { CalendarHeart, ClipboardList, HeartPulse, Mail, ShieldCheck, Watch, Phone } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { patientContext, patientProfile } from "@/data/mock-data";
@@ -64,6 +64,17 @@ export default function PersonalInfoPage() {
                   </p>
                 </div>
               </div>
+              <div className="flex items-start gap-3 rounded-[24px] bg-[#EEF7F4] p-4">
+                <Watch className="mt-1 h-6 w-6 text-primary" />
+                <div>
+                  <p className="font-medium">Wearable connection</p>
+                  <p className="text-muted-foreground">
+                    {patientContext.wearableConnected
+                      ? `${patientContext.wearableName} linked and ready for session tracking.`
+                      : "No wearable linked right now."}
+                  </p>
+                </div>
+              </div>
             </CardContent>
           </Card>
 
@@ -77,6 +88,28 @@ export default function PersonalInfoPage() {
               <p>Suggested exercise intensity: {patientProfile.intensity}</p>
               <p>Suggested duration: {patientProfile.duration}</p>
               <p>Current streak: {patientContext.streak} days</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Support contacts</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 text-lg">
+              <div className="flex items-start gap-3 rounded-[24px] bg-background p-4">
+                <Phone className="mt-1 h-6 w-6 text-primary" />
+                <div>
+                  <p className="font-medium">Emergency contact</p>
+                  <p className="text-muted-foreground">{patientContext.emergencyContact}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 rounded-[24px] bg-background p-4">
+                <Mail className="mt-1 h-6 w-6 text-primary" />
+                <div>
+                  <p className="font-medium">Care team contact</p>
+                  <p className="text-muted-foreground">{patientContext.careTeamContact}</p>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </div>

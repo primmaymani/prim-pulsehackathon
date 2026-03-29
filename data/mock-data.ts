@@ -210,5 +210,9 @@ export const patientContext = {
   streak: 5,
   lastActivity: "15-min walk",
   careTeamGoals: "30-min walks 3x/week, gentle stretching daily",
-  redFlagTriggered: false
+  redFlagTriggered: false,
+  emergencyContact: "Elena Alvarez · (555) 010-2486",
+  careTeamContact: "care-team@stfrancis-demo.org",
+  wearableName: "Polar H10",
+  wearableConnected: true
 };
